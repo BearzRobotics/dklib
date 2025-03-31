@@ -2,9 +2,9 @@
 //
 // Copyright (C) 2025 Dakota James Owen Keeler
 //
-// This file is part of hexseq.
+// This file is part of dklib.
 //
-// hexseq is free software: you can redistribute it and/or modify
+// dklib is free software: you can redistribute it and/or modify
 // it under the terms of version 2 of the GNU General Public License
 // as published by the Free Software Foundation.
 //
@@ -52,6 +52,8 @@ pub const dktest = struct {
     }
 };
 
+/// Follow the linux sysexit.h where applicable
+/// https://man7.org/linux/man-pages/man3/sysexits.h.3head.html
 pub const ExitCode = enum(u8) {
     // Standard errors
     ok = 0, // success
@@ -115,9 +117,9 @@ pub const ExitCode = enum(u8) {
 pub fn exit_with(code: ExitCode) noreturn {
     // Optional: Green for OK, Red for error
     if (code == .ok) {
-        std.debug.print("\x1b[32mPASSED\x1b[0m: {s}\n", .{code.describe()});
+        //std.debug.print("\x1b[32mPASSED\x1b[0m: {s}\n", .{code.describe()});
     } else {
         std.debug.print("\x1b[31mFAILED\x1b[0m: {s}\n", .{code.describe()});
     }
-    std.os.exit(@intFromEnum(code));
+    std.process.exit(@intFromEnum(code));
 }
