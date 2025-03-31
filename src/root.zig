@@ -119,7 +119,7 @@ pub fn exit_with(code: ExitCode) noreturn {
     if (code == .ok) {
         //std.debug.print("\x1b[32mPASSED\x1b[0m: {s}\n", .{code.describe()});
     } else {
-        std.debug.print("\x1b[31mFAILED\x1b[0m: Code:{d} {s}\n", .{ code, code.describe() });
+        std.debug.print("\x1b[31mFAILED\x1b[0m: Code:{d} {s}\n", .{ @intFromEnum(code), code.describe() });
     }
     std.process.exit(@intFromEnum(code));
 }
